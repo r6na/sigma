@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шрот - ГК «Sigma»</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #F5E6D3;
+            line-height: 1.5;
+            position: relative;
+            background-color: #1A1814;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.25;
+            filter: brightness(0.7) sepia(0.4);
+        }
+
+        .color-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 24, 20, 0.92) 0%, rgba(46, 38, 24, 0.88) 50%, rgba(26, 24, 20, 0.92) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-bar {
+            background: rgba(26, 24, 20, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 25px 0 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .logo-sigma {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: #D4A017;
+            text-transform: uppercase;
+            text-shadow: 0 0 25px rgba(212, 160, 23, 0.4);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-sigma::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        }
+
+        .nav-bar {
+            background: rgba(26, 24, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #C4B89A;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+            position: relative;
+            padding-bottom: 5px;
+            white-space: nowrap;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4A017;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #D4A017;
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .main-nav a.active {
+            color: #D4A017;
+            font-weight: 600;
+        }
+
+        .lk-button {
+            position: absolute;
+            right: 0;
+            background: transparent;
+            color: #D4A017;
+            text-decoration: none;
+            padding: 10px 28px;
+            border: 2px solid #D4A017;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(212, 160, 23, 0.08);
+            white-space: nowrap;
+        }
+
+        .lk-button:hover {
+            background: #D4A017;
+            color: #1A1814;
+            box-shadow: 0 0 25px rgba(212, 160, 23, 0.3);
+        }
+
+        .product-content {
+            padding: 50px 0 40px;
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .product-header h1 {
+            font-size: 42px;
+            color: #D4A017;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .sunflower-divider {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 28px;
+            letter-spacing: 10px;
+            opacity: 0.7;
+            color: #D4A017;
+        }
+
+        .product-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .product-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #C4B89A;
+            background: rgba(26, 24, 20, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 160, 23, 0.15);
+        }
+
+        .product-text p {
+            margin-bottom: 20px;
+        }
+
+        .product-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .product-image {
+            width: 100%;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid rgba(212, 160, 23, 0.25);
+        }
+
+        .characteristics {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .characteristics h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .char-card {
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 16px;
+            padding: 25px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .char-card:hover {
+            border-color: rgba(212, 160, 23, 0.5);
+            background: rgba(196, 184, 154, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .char-card h3 {
+            font-size: 18px;
+            color: #E8D5B7;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .char-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #A8987A;
+        }
+
+        .char-card strong {
+            color: #D4A017;
+        }
+
+        /* НОВЫЙ БЛОК: Состав шрота */
+        .composition-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .composition-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .composition-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .composition-item {
+            background: rgba(196, 184, 154, 0.06);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .composition-item:hover {
+            border-color: rgba(212, 160, 23, 0.5);
+            background: rgba(196, 184, 154, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .composition-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            color: #D4A017;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .composition-label {
+            font-size: 14px;
+            color: #A8987A;
+            line-height: 1.4;
+        }
+
+        .usage-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .usage-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .usage-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            list-style: none;
+        }
+
+        .usage-item {
+            background: rgba(196, 184, 154, 0.06);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .usage-item:hover {
+            border-color: rgba(212, 160, 23, 0.5);
+            background: rgba(196, 184, 154, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .usage-item p {
+            font-size: 16px;
+            color: #C4B89A;
+            font-weight: 500;
+        }
+
+        /* НОВЫЙ БЛОК: Нормы ввода в рацион */
+        .norms-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .norms-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .norms-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(26, 24, 20, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .norms-table th {
+            background: rgba(212, 160, 23, 0.15);
+            color: #D4A017;
+            padding: 14px 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 2px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .norms-table td {
+            padding: 12px 18px;
+            font-size: 15px;
+            color: #C4B89A;
+            border-bottom: 1px solid rgba(212, 160, 23, 0.1);
+        }
+
+        .norms-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .research-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .research-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .research-info {
+            background: rgba(26, 24, 20, 0.4);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .research-info p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #C4B89A;
+            margin-bottom: 15px;
+        }
+
+        .research-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        .research-info strong {
+            color: #E8D5B7;
+        }
+
+        .highlight {
+            color: #D4A017;
+            font-weight: 600;
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: transparent;
+            color: #D4A017;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 2px solid #D4A017;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #D4A017;
+            color: #1A1814;
+            box-shadow: 0 0 25px rgba(212, 160, 23, 0.3);
+        }
+
+        .footer {
+            background: rgba(26, 24, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(212, 160, 23, 0.3);
+            padding: 50px 0 25px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #D4A017;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #D4A017;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #A8987A;
+            margin-bottom: 12px;
+            font-size: 15px;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #D4A017;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(212, 160, 23, 0.2);
+            color: #7A6B5A;
+            font-size: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #D4A017;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media (max-width: 992px) {
+            .product-body {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .main-nav {
+                gap: 20px;
+            }
+            .lk-button {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+            .char-grid,
+            .usage-list {
+                grid-template-columns: 1fr;
+            }
+            .composition-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-sigma {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-container {
+                justify-content: flex-end;
+            }
+            .main-nav {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 24, 20, 0.95);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 25px;
+                display: none;
+                z-index: 100;
+                border-bottom: 2px solid #D4A017;
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .lk-button {
+                position: absolute;
+                right: 0;
+            }
+            .product-header h1 {
+                font-size: 30px;
+            }
+            .product-text {
+                font-size: 16px;
+            }
+            .composition-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .norms-table th,
+            .norms-table td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline class="video-background">
+        <source src="https://cdn.coverr.co/videos/coverr-sunflower-field-5244/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="color-overlay"></div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-sigma">Sigma</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">---</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="главная.html">Главная</a>
+                <a href="продукция.html" class="active">Продукция</a>
+                <a href="доставка.html">Доставка</a>
+                <a href="контакты.html">Контакты</a>
+                <a href="/sigma-site/public/ии-помощник.html">ИИ-помощник</a>
+            </nav>
+            <a href="лк.html" class="lk-button">Личный кабинет</a>
+        </div>
+    </div>
+
+    <section class="product-content">
+        <div class="container">
+            <div class="product-header">
+                <h1>Шрот</h1>
+            </div>
+
+
+            <div class="product-body">
+                <div class="product-text">
+                    <p>Шрот получают при извлечении масла из масличных культур путем экстракции органическими растворителями. Далее растворители удаляют с помощью пара. Таким образом, в шроте остается минимальное содержание жира (0,5 – 3 %). Однако концентрация протеина и микроэлементов в шротах намного выше, чем в жмыхах. Шроты имеют рассыпчатую структуру и хранятся значительно дольше.</p>
+                    <p>Шрот подсолнечника — продукт, являющий собой один из наиболее ценных кормов, широко применяемых в той или иной сфере сельского хозяйства. Его использование дает возможность в значительной степени повысить скорость взращивания домашних животных и птицы. Рапсовый шрот используют при разведении свиней, гусей, уток, кур, индюшек, кроликов.</p>
+                    <p>С начала 2020 года в испытательном центре ФГБУ «Кемеровская МВЛ» было проанализировано 40 проб жмыхов и шротов различных масличных культур, проведено свыше 200 исследований. Пять образцов не соответствовали требованиям заявленной нормативной документации по содержанию массовой доли жира, протеина и нитратов.</p>
+                </div>
+                <div class="product-image">
+                    <img src="img/image 15.png" alt="Шрот">
+                </div>
+            </div>
+
+            <div class="characteristics">
+                <h2>Характеристики шрота</h2>
+                <div class="char-grid">
+                    <div class="char-card">
+                        <h3>Содержание жира</h3>
+                        <p>Минимальное содержание жира: <strong>0,5 – 3 %</strong></p>
+                    </div>
+                    <div class="char-card">
+                        <h3>Пищевая ценность</h3>
+                        <p>Высокая концентрация протеина и микроэлементов, значительно выше чем в жмыхах</p>
+                    </div>
+                    <div class="char-card">
+                        <h3>Структура</h3>
+                        <p>Рассыпчатая структура, удобная для хранения и транспортировки</p>
+                    </div>
+                    <div class="char-card">
+                        <h3>Срок хранения</h3>
+                        <p>Хранится значительно дольше благодаря низкому содержанию жира</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- НОВЫЙ БЛОК: Состав шрота -->
+            <div class="composition-section">
+                <h2>Состав подсолнечного шрота</h2>
+                <div class="composition-grid">
+                    <div class="composition-item">
+                        <div class="composition-value">36-39%</div>
+                        <div class="composition-label">сырой протеин</div>
+                    </div>
+                    <div class="composition-item">
+                        <div class="composition-value">20-23%</div>
+                        <div class="composition-label">клетчатка</div>
+                    </div>
+                    <div class="composition-item">
+                        <div class="composition-value">1,5-3%</div>
+                        <div class="composition-label">остаточный жир</div>
+                    </div>
+                    <div class="composition-item">
+                        <div class="composition-value">6-8%</div>
+                        <div class="composition-label">зола и минералы</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Применение в сельском хозяйстве</h2>
+                <ul class="usage-list">
+                    <li class="usage-item"><p>Свиньи</p></li>
+                    <li class="usage-item"><p>Гуси и утки</p></li>
+                    <li class="usage-item"><p>Куры</p></li>
+                    <li class="usage-item"><p>Индюшки</p></li>
+                    <li class="usage-item"><p>Кролики</p></li>
+                </ul>
+            </div>
+
+            <!-- НОВЫЙ БЛОК: Нормы ввода в рацион -->
+            <div class="norms-section">
+                <h2>Нормы ввода в рацион</h2>
+                <div style="overflow-x: auto;">
+                    <table class="norms-table">
+                        <thead>
+                            <tr>
+                                <th>Животное / птица</th>
+                                <th>Доля шрота в комбикорме</th>
+                                <th>Результат</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Куры-несушки</td>
+                                <td>до 15%</td>
+                                <td>Повышение яйценоскости на 8-12%</td>
+                            </tr>
+                            <tr>
+                                <td>Бройлеры</td>
+                                <td>до 20%</td>
+                                <td>Ускорение набора массы на 10-15%</td>
+                            </tr>
+                            <tr>
+                                <td>Свиньи на откорме</td>
+                                <td>до 10%</td>
+                                <td>Среднесуточный привес +50-80 г</td>
+                            </tr>
+                            <tr>
+                                <td>КРС (дойные коровы)</td>
+                                <td>до 25%</td>
+                                <td>Повышение удоев и жирности молока</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                            <!-- Ценник -->
+            <div style="padding: 30px; margin: 40px 0; background: rgba(196, 184, 154, 0.06); backdrop-filter: blur(10px); border: 1px solid rgba(212, 160, 23, 0.2); border-radius: 20px; text-align: center;">
+                <div style="font-size: 13px; color: #A8987A; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">Ориентировочная цена</div>
+                <div style="font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #D4A017; letter-spacing: 2px;">от 18 000 руб.</div>
+                <div style="font-size: 14px; color: #C4B89A; margin-top: 5px;">за тонну</div>
+            </div>
+            </div>
+
+            
+            <div class="back-button-container">
+                <a href="продукция3.html" class="back-button">Назад к продукции</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <a href="главная.html">Главная</a>
+                    <a href="продукция.html">Продукция</a>
+                    <a href="доставка.html">Доставка</a>
+                    <a href="контакты.html">Контакты</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>улица Мира, 20А, Оренбург, 460040</p>
+                    <p>+7 (35139) 7-51-49</p>
+                    <p>info@tdsigma.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Личный кабинет</h3>
+                    <a href="авторизация.html">Авторизация</a>
+                    <a href="регистрация.html">Регистрация</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                (c) 2025 ГК Сигма. Подсолнечное масло и продукты переработки. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

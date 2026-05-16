@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигма - регистрация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .top-bar {
+            background-color: #F2DF83;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .logo-sigma {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .nav-bar {
+            background-color: #fff;
+            border-bottom: 2px solid #F2DF83;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: #F2DF83;
+        }
+
+        .main-nav a.active {
+            color: #F2DF83;
+            font-weight: 700;
+        }
+
+        .lk-button {
+            position: absolute;
+            right: 0;
+            background-color: #F2DF83;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .registration-content {
+            padding: 60px 0 80px;
+            min-height: calc(100vh - 180px);
+            display: flex;
+            align-items: center;
+        }
+
+        .registration-container {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .registration-card {
+            background-color: #f9f9f9;
+            padding: 40px;
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .registration-header h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .registration-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input, 
+        .form-group select {
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #F2DF83;
+        }
+
+        .form-group input.error,
+        .form-group select.error {
+            border-color: #f44336;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .name-fields {
+            display: grid;
+            gap: 20px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .submit-btn {
+            background-color: #F2DF83;
+            color: #333;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #999;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 14px;
+        }
+
+        .social-registration {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: white;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #f9f9f9;
+        }
+
+        .social-btn .icon {
+            font-size: 20px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #333;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .login-link a:hover {
+            color: #F2DF83;
+        }
+
+        .footer {
+            background-color: #F2DF83;
+            color: #333;
+            padding: 40px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            margin-top: 20px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .main-nav {
+                gap: 25px;
+            }
+            
+            .lk-button {
+                position: static;
+                margin-left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-sigma {
+                font-size: 36px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                left: 0;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 120px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                display: none;
+                z-index: 100;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .lk-button {
+                position: absolute;
+                right: 0;
+                margin-left: 0;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .registration-card {
+                padding: 30px 25px;
+            }
+            
+            .registration-header h1 {
+                font-size: 28px;
+            }
+            
+            .name-fields {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-sigma">Sigma</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="главная.html">Главная</a>
+                <a href="продукция.html">Продукция</a>
+                <a href="доставка.html">Доставка</a>
+                <a href="контакты.html">Контакты</a>
+            </nav>
+            
+            <button class="lk-button"><a href="лк.html">Личный кабинет</button></a>
+        </div>
+    </div>
+
+    <section class="registration-content">
+        <div class="container">
+            <div class="registration-container">
+                <div class="registration-card">
+                    <div class="registration-header">
+                        <h1>Регистрация</h1>
+                        <p>Создайте аккаунт для доступа к личному кабинету</p>
+                    </div>
+
+                    <form class="registration-form" id="registrationForm">
+                        <div class="name-fields">
+                            <div class="form-group">
+                                <label for="firstName" class="required">Имя</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Ваше имя" required>
+                                <div class="error-message" id="firstNameError">Пожалуйста, введите имя</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName" class="required">Фамилия</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Ваша фамилия" required>
+                                <div class="error-message" id="lastNameError">Пожалуйста, введите фамилию</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company" class="required">Компания</label>
+                            <input type="text" id="company" name="company" placeholder="Название вашей компании" required>
+                            <div class="error-message" id="companyError">Пожалуйста, введите название компании</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="required">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Ваш email" required>
+                            <div class="error-message" id="emailError">Пожалуйста, введите корректный email</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="required">Телефон</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+                            <div class="error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
+                        </div>
+
+                        <div class="form-group password-toggle">
+                            <label for="password" class="required">Пароль</label>
+                            <input type="password" id="password" name="password" placeholder="Придумайте пароль" required>
+                            <button type="button" class="toggle-password" id="togglePassword"></button>
+                            <div class="error-message" id="passwordError">Пароль должен содержать минимум 8 символов, включая буквы и цифры</div>
+                        </div>
+
+                        <div class="form-group password-toggle">
+                            <label for="confirmPassword" class="required">Подтверждение пароля</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword"></button>
+                            <div class="error-message" id="confirmPasswordError">Пароли не совпадают</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userType">Тип пользователя</label>
+                            <select id="userType" name="userType">
+                                <option value="buyer">Покупатель</option>
+                                <option value="supplier">Поставщик</option>
+                                <option value="partner">Партнер</option>
+                                <option value="distributor">Дистрибьютор</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <a href="главная.html">Главная</a>
+                    <a href="продукция.html">Продукция</a>
+                    <a href="доставка.html">Доставка</a>
+                    <a href="контакты.html">Контакты</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>улица Мира, 20А, Оренбург, 460040</p>
+                    <p>+7 (35139) 7-51-49</p>
+                    <p>info@tdsigma.ru</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Личный кабинет</h3>
+                    <a href="авторизация.html">Авторизация</a>
+                    <a href="регистрация.html">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link (for mobile)
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+        
+        // ЛК button functionality
+        const lkButton = document.querySelector('.lk-button');
+        lkButton.addEventListener('click', function() {
+            alert('Для входа в личный кабинет необходимо авторизоваться');
+        });
+        
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+        
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+        
+        // Form validation
+        const registrationForm = document.getElementById('registrationForm');
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const companyInput = document.getElementById('company');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const passwordInputField = document.getElementById('password');
+        const confirmPasswordInputField = document.getElementById('confirmPassword');
+        
+        const firstNameError = document.getElementById('firstNameError');
+        const lastNameError = document.getElementById('lastNameError');
+        const companyError = document.getElementById('companyError');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        
+        const submitBtn = document.getElementById('submitBtn');
+        
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function validatePhone(phone) {
+            const re = /^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
+            return re.test(phone);
+        }
+        
+        function validatePassword(password) {
+            const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+            return re.test(password);
+        }
+        
+        function showError(element, message) {
+            element.textContent = message;
+            element.classList.add('show');
+        }
+        
+        function hideError(element) {
+            element.classList.remove('show');
+        }
+        
+        function validateForm() {
+            let isValid = true;
+            
+            if (!firstNameInput.value.trim()) {
+                showError(firstNameError, 'Пожалуйста, введите имя');
+                firstNameInput.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(firstNameError);
+                firstNameInput.classList.remove('error');
+            }
+            
+            if (!lastNameInput.value.trim()) {
+                showError(lastNameError, 'Пожалуйста, введите фамилию');
+                lastNameInput.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(lastNameError);
+                lastNameInput.classList.remove('error');
+            }
+            
+            if (!companyInput.value.trim()) {
+                showError(companyError, 'Пожалуйста, введите название компании');
+                companyInput.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(companyError);
+                companyInput.classList.remove('error');
+            }
+            
+            if (!validateEmail(emailInput.value)) {
+                showError(emailError, 'Пожалуйста, введите корректный email');
+                emailInput.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(emailError);
+                emailInput.classList.remove('error');
+            }
+            
+            if (!validatePhone(phoneInput.value)) {
+                showError(phoneError, 'Пожалуйста, введите корректный номер телефона');
+                phoneInput.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(phoneError);
+                phoneInput.classList.remove('error');
+            }
+            
+            if (!validatePassword(passwordInputField.value)) {
+                showError(passwordError, 'Пароль должен содержать минимум 8 символов, включая буквы и цифры');
+                passwordInputField.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(passwordError);
+                passwordInputField.classList.remove('error');
+            }
+            
+            if (passwordInputField.value !== confirmPasswordInputField.value) {
+                showError(confirmPasswordError, 'Пароли не совпадают');
+                confirmPasswordInputField.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(confirmPasswordError);
+                confirmPasswordInputField.classList.remove('error');
+            }
+            
+            return isValid;
+        }
+        
+        firstNameInput.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                showError(firstNameError, 'Пожалуйста, введите имя');
+                this.classList.add('error');
+            } else {
+                hideError(firstNameError);
+                this.classList.remove('error');
+            }
+        });
+        
+        lastNameInput.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                showError(lastNameError, 'Пожалуйста, введите фамилию');
+                this.classList.add('error');
+            } else {
+                hideError(lastNameError);
+                this.classList.remove('error');
+            }
+        });
+        
+        companyInput.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                showError(companyError, 'Пожалуйста, введите название компании');
+                this.classList.add('error');
+            } else {
+                hideError(companyError);
+                this.classList.remove('error');
+            }
+        });
+        
+        emailInput.addEventListener('input', function() {
+            if (!validateEmail(this.value)) {
+                showError(emailError, 'Пожалуйста, введите корректный email');
+                this.classList.add('error');
+            } else {
+                hideError(emailError);
+                this.classList.remove('error');
+            }
+        });
+        
+        phoneInput.addEventListener('input', function() {
+            if (!validatePhone(this.value)) {
+                showError(phoneError, 'Пожалуйста, введите корректный номер телефона');
+                this.classList.add('error');
+            } else {
+                hideError(phoneError);
+                this.classList.remove('error');
+            }
+        });
+        
+        passwordInputField.addEventListener('input', function() {
+            if (!validatePassword(this.value)) {
+                showError(passwordError, 'Пароль должен содержать минимум 8 символов, включая буквы и цифры');
+                this.classList.add('error');
+            } else {
+                hideError(passwordError);
+                this.classList.remove('error');
+            }
+            
+            if (this.value !== confirmPasswordInputField.value) {
+                showError(confirmPasswordError, 'Пароли не совпадают');
+                confirmPasswordInputField.classList.add('error');
+            } else {
+                hideError(confirmPasswordError);
+                confirmPasswordInputField.classList.remove('error');
+            }
+        });
+        
+        confirmPasswordInputField.addEventListener('input', function() {
+            if (this.value !== passwordInputField.value) {
+                showError(confirmPasswordError, 'Пароли не совпадают');
+                this.classList.add('error');
+            } else {
+                hideError(confirmPasswordError);
+                this.classList.remove('error');
+            }
+        });
+        
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Регистрация...';
+                
+                setTimeout(function() {
+                    alert('Регистрация прошла успешно! На ваш email отправлено письмо с подтверждением.');
+                    
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Зарегистрироваться';
+                }, 2000);
+            }
+        });
+        
+        const socialButtons = document.querySelectorAll('.social-btn');
+        socialButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const provider = this.querySelector('span:last-child').textContent;
+                alert(`Регистрация через ${provider} - функция в разработке`);
+            });
+        });
+        
+        phoneInput.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            
+            if (value.startsWith('7') || value.startsWith('8')) {
+                value = value.substring(1);
+            }
+            
+            let formattedValue = '+7 ';
+            
+            if (value.length > 0) {
+                formattedValue += '(' + value.substring(0, 3);
+            }
+            if (value.length >= 4) {
+                formattedValue += ') ' + value.substring(3, 6);
+            }
+            if (value.length >= 7) {
+                formattedValue += '-' + value.substring(6, 8);
+            }
+            if (value.length >= 9) {
+                formattedValue += '-' + value.substring(8, 10);
+            }
+            
+            this.value = formattedValue;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигма - авторизация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            line-height: 1.4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .top-bar {
+            background-color: #F2DF83;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .logo-sigma {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .nav-bar {
+            background-color: #fff;
+            border-bottom: 2px solid #F2DF83;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: #F2DF83;
+        }
+
+        .main-nav a.active {
+            color: #F2DF83;
+            font-weight: 700;
+        }
+
+        .lk-button {
+            position: absolute;
+            right: 0;
+            background-color: #F2DF83;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .lk-button:hover {
+            background-color: #e6d075;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .form-group label::before {
+            content: "•";
+            color: #F2DF83;
+            font-size: 18px;
+        }
+
+        .form-group input {
+            padding: 16px 20px;
+            border: 2px solid #e1e5eb;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #F2DF83;
+            background-color: white;
+        }
+
+        .form-group input.error {
+            border-color: #f44336;
+            background-color: #fff9f9;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .remember-me input {
+            width: 20px;
+            height: 20px;
+            accent-color: #F2DF83;
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .forgot-password {
+            font-size: 14px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #F2DF83 0%, #e6d075 100%);
+            color: #333;
+            border: none;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .quick-login {
+            margin: 30px 0;
+        }
+
+        .quick-login-title {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .quick-login-title::before,
+        .quick-login-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #e1e5eb;
+        }
+
+        .quick-login-title::before {
+            left: 0;
+        }
+
+        .quick-login-title::after {
+            right: 0;
+        }
+
+        .quick-buttons {
+            display: grid;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quick-btn {
+            padding: 14px;
+            border: 2px solid #e1e5eb;
+            background: white;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+        }
+
+        .quick-btn.admin {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            color: white;
+            border: none;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid #e1e5eb;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .register-link a {
+            color: #333;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .footer {
+            background-color: #F2DF83;
+            color: #333;
+            padding: 30px 0 15px;
+            margin-top: auto;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #222;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(51, 51, 51, 0.2);
+            margin-top: 10px;
+            color: #333;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: rgba(242, 223, 131, 0.2);
+        }
+
+        @media (max-width: 992px) {
+            .main-nav {
+                gap: 25px;
+            }
+            
+            .lk-button {
+                position: static;
+                margin-left: 20px;
+            }
+            
+            .login-box {
+                padding: 40px 35px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-sigma {
+                font-size: 36px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                left: 0;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 120px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                display: none;
+                z-index: 100;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .lk-button {
+                position: absolute;
+                right: 0;
+                margin-left: 0;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .login-box {
+                padding: 35px 25px;
+                margin: 20px;
+            }
+            
+            .login-header h1 {
+                font-size: 28px;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .quick-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+                margin: 15px;
+            }
+            
+            .login-header h1 {
+                font-size: 24px;
+            }
+            
+            .login-header p {
+                font-size: 14px;
+            }
+            
+            .form-group input {
+                padding: 14px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-sigma">Sigma</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="главная.html">Главная</a>
+                <a href="продукция.html">Продукция</a>
+                <a href="доставка.html">Доставка</a>
+                <a href="контакты.html">Контакты</a>
+            </nav>
+            
+            <button class="lk-button" id="lkButton"><a href="лк.html">Личный кабинет</button></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="containerr">
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="login-header">
+                        <h1>Вход в систему</h1>
+                        <p>Введите свои учетные данные для доступа к личному кабинету</p>
+                    </div>
+
+                    <form class="login-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Логин</label>
+                            <input type="text" id="username" name="username" placeholder="Введите логин" required autocomplete="username">
+                            <div class="error-message" id="usernameError">Логин должен содержать минимум 3 символа</div>
+                        </div>
+
+                        <div class="form-group password-toggle">
+                            <label for="password">Пароль</label>
+                            <input type="password" id="password" name="password" placeholder="Введите пароль" required autocomplete="current-password">
+                            <button type="button" class="toggle-password" id="togglePassword"></button>
+                            <div class="error-message" id="passwordError">Пароль должен содержать минимум 6 символов</div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="remember">
+                                <span>Запомнить меня</span>
+                            </label>
+                            <a href="#" class="forgot-password">Забыли пароль?</a>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span>Войти в систему</span>
+                        </button>
+
+                        <div class="quick-login">
+                            <div class="quick-login-title">Быстрый вход</div>
+                            <div class="quick-buttons">
+                                <button type="button" class="quick-btn" id="guestBtn">Войти как гость</button>
+                                <button type="button" class="quick-btn admin" id="adminBtn">Войти как администратор</button>
+                            </div>
+                        </div>
+
+                        <div class="register-link">
+                            <p>Ещё нет аккаунта? <a href="регистрация.html">Создать новый аккаунт</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <a href="главная.html">Главная</a>
+                    <a href="продукция.html">Продукция</a>
+                    <a href="доставка.html">Доставка</a>
+                    <a href="контакты.html">Контакты</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>ул. Мира, 20А, Оренбург, 460040</p>
+                    <p>+7 (35139) 7-51-49</p>
+                    <p>info@tdsigma.ru</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Личный кабинет</h3>
+                    <a href="авторизация.html">Авторизация</a>
+                    <a href="регистрация.html">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Close menu when clicking on a link (for mobile)
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                }
+            });
+        });
+        
+        // ЛК button functionality
+        const lkButton = document.getElementById('lkButton');
+        lkButton.addEventListener('click', function() {
+            alert('Вы уже на странице входа в личный кабинет');
+        });
+        
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+        
+        // Form validation
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInputField = document.getElementById('password');
+        const usernameError = document.getElementById('usernameError');
+        const passwordError = document.getElementById('passwordError');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitBtnText = submitBtn.querySelector('span');
+        
+        function validateUsername(username) {
+            return username.trim().length >= 3;
+        }
+        
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+        
+        function showError(element, message) {
+            element.textContent = message;
+            element.classList.add('show');
+        }
+        
+        function hideError(element) {
+            element.classList.remove('show');
+        }
+        
+        function validateForm() {
+            let isValid = true;
+            
+            // Validate username
+            if (!validateUsername(usernameInput.value)) {
+                showError(usernameError, 'Логин должен содержать минимум 3 символа');
+                usernameInput.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(usernameError);
+                usernameInput.classList.remove('error');
+            }
+            
+            // Validate password
+            if (!validatePassword(passwordInputField.value)) {
+                showError(passwordError, 'Пароль должен содержать минимум 6 символов');
+                passwordInputField.classList.add('error');
+                isValid = false;
+            } else {
+                hideError(passwordError);
+                passwordInputField.classList.remove('error');
+            }
+            
+            return isValid;
+        }
+        
+        // Real-time validation
+        usernameInput.addEventListener('input', function() {
+            if (!validateUsername(this.value)) {
+                showError(usernameError, 'Логин должен содержать минимум 3 символа');
+                this.classList.add('error');
+            } else {
+                hideError(usernameError);
+                this.classList.remove('error');
+            }
+        });
+        
+        passwordInputField.addEventListener('input', function() {
+            if (!validatePassword(this.value)) {
+                showError(passwordError, 'Пароль должен содержать минимум 6 символов');
+                this.classList.add('error');
+            } else {
+                hideError(passwordError);
+                this.classList.remove('error');
+            }
+        });
+        
+        // Form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtnText.textContent = 'Вход...';
+                
+                // Simulate API call
+                setTimeout(function() {
+                    const username = usernameInput.value;
+                    const password = passwordInputField.value;
+                    
+                    // Simple authentication simulation
+                    if ((username === 'admin' && password === 'admin123') || 
+                        (username === 'user' && password === 'user123')) {
+                        alert('Вход выполнен успешно! Добро пожаловать, ' + username + '.');
+                        // Redirect to dashboard or main page
+                        window.location.href = 'index.html';
+                    } else if (username === 'guest' && password === 'guest123') {
+                        alert('Вход выполнен как гость. Доступ к ограниченным функциям.');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Неверный логин или пароль. Попробуйте снова.');
+                        submitBtn.disabled = false;
+                        submitBtnText.textContent = 'Войти в систему';
+                    }
+                }, 1000);
+            }
+        });
+        
+        // Quick login buttons
+        const guestBtn = document.getElementById('guestBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        
+        guestBtn.addEventListener('click', function() {
+            usernameInput.value = 'guest';
+            passwordInputField.value = 'guest123';
+            
+            // Auto submit after filling
+            setTimeout(() => {
+                loginForm.dispatchEvent(new Event('submit'));
+            }, 100);
+        });
+        
+        adminBtn.addEventListener('click', function() {
+            usernameInput.value = 'admin';
+            passwordInputField.value = 'admin123';
+            
+            // Auto submit after filling
+            setTimeout(() => {
+                loginForm.dispatchEvent(new Event('submit'));
+            }, 100);
+        });
+        
+        // Forgot password link
+        const forgotPasswordLink = document.querySelector('.forgot-password');
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt('Введите email, указанный при регистрации:');
+            if (email) {
+                alert('Инструкции для сброса пароля отправлены на ' + email);
+            }
+        });
+        
+        // Auto-focus on username input
+        usernameInput.focus();
+        
+        // Check if user was redirected from logout
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('logout')) {
+            setTimeout(() => {
+                alert('Вы успешно вышли из системы.');
+            }, 300);
+        }
+        
+        // Check for remember me
+        const rememberCheckbox = document.getElementById('remember');
+        const savedUsername = localStorage.getItem('rememberedUsername');
+        
+        if (savedUsername) {
+            usernameInput.value = savedUsername;
+            rememberCheckbox.checked = true;
+        }
+        
+        // Save username if remember me is checked
+        rememberCheckbox.addEventListener('change', function() {
+            if (this.checked && usernameInput.value.trim()) {
+                localStorage.setItem('rememberedUsername', usernameInput.value);
+            } else {
+                localStorage.removeItem('rememberedUsername');
+            }
+        });
+        
+        // Add some interactive effects
+        const inputs = document.querySelectorAll('.form-group input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Add animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.login-box').style.animation = 'fadeIn 0.5s ease-out';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигма - Личный кабинет</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .top-bar {
+            background-color: #F2DF83;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .logo-sigma {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .nav-bar {
+            background-color: #fff;
+            border-bottom: 2px solid #F2DF83;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .main-nav a:hover {
+            color: #F2DF83;
+        }
+
+        .main-nav a.active {
+            color: #F2DF83;
+            font-weight: 700;
+        }
+
+        .lk-button {
+            position: absolute;
+            right: 0;
+            background-color: #F2DF83;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .main-content {
+            padding: 40px 0;
+            min-height: 60vh;
+        }
+
+        .content-box {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .profile-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .form-group input:disabled {
+            background-color: #f9f9f9;
+            color: #666;
+        }
+
+        .form-actions {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 16px;
+            min-width: 150px;
+        }
+
+        .btn-primary {
+            background-color: #F2DF83;
+            color: #333;
+            border-color: #F2DF83;
+        }
+
+        .btn-secondary {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .footer {
+            background-color: #F2DF83;
+            color: #333;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            margin-top: 20px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+        }
+
+        @media (max-width: 992px) {
+            .main-nav {
+                gap: 25px;
+            }
+            
+            .lk-button {
+                position: static;
+                margin-left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-sigma {
+                font-size: 36px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 120px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                display: none;
+                z-index: 100;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .lk-button {
+                position: absolute;
+                right: 0;
+                margin-left: 0;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .content-box {
+                padding: 25px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-box {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-sigma">Sigma</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="главная.html">Главная</a>
+                <a href="продукция.html">Продукция</a>
+                <a href="доставка.html">Доставка</a>
+                <a href="контакты.html">Контакты</a>
+            </nav>
+            
+            <button class="lk-button" id="lkButton">Выйти</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="content-box">
+                <h1 class="title">Личный кабинет</h1>
+                
+                <form class="profile-form" id="profileForm">
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text" id="lastName" value="Сапрыкина" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" id="firstName" value="Дарина" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Отчество</label>
+                        <input type="text" id="middleName" value="Дмитриевна" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" value="sdd@gmail.com" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" id="phone" value="+7 (999) 666-99-66" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Компания</label>
+                        <input type="text" id="company" value="ООО 'Дельта'" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Должность</label>
+                        <input type="text" id="position" value="Директор" disabled>
+                    </div>
+                    
+                    <div class="form-actions" id="formActions" style="display: none;">
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                    </div>
+                    
+                    <div id="editBtn">
+                        <button type="button" class="btn btn-primary" id="editProfileBtn">Редактировать профиль</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <a href="главная.html">Главная</a>
+                    <a href="продукция.html">Продукция</a>
+                    <a href="доставка.html">Доставка</a>
+                    <a href="контакты.html">Контакты</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>улица Мира, 20А, Оренбург, 460040</p>
+                    <p>+7 (35139) 7-51-49</p>
+                    <p>info@tdsigma.ru</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Личный кабинет</h3>
+                    <a href="авторизация.html">Авторизация</a>
+                    <a href="регистрация.html">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link (for mobile)
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+        
+        // Logout button
+        document.getElementById('lkButton').addEventListener('click', function() {
+            if (confirm('Вы уверены, что хотите выйти из личного кабинета?')) {
+                window.location.href = 'авторизация.html';
+            }
+        });
+
+        // Profile editing
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const formActions = document.getElementById('formActions');
+        const editBtnDiv = document.getElementById('editBtn');
+        const inputs = document.querySelectorAll('.profile-form input');
+        
+        // Store original values
+        inputs.forEach(input => {
+            input.defaultValue = input.value;
+        });
+        
+        editProfileBtn.addEventListener('click', function() {
+            // Enable all inputs
+            inputs.forEach(input => {
+                input.disabled = false;
+            });
+            
+            // Show save/cancel buttons, hide edit button
+            formActions.style.display = 'flex';
+            editBtnDiv.style.display = 'none';
+        });
+        
+        cancelBtn.addEventListener('click', function() {
+            // Restore original values and disable inputs
+            inputs.forEach(input => {
+                input.value = input.defaultValue;
+                input.disabled = true;
+            });
+            
+            // Show edit button, hide save/cancel buttons
+            formActions.style.display = 'none';
+            editBtnDiv.style.display = 'block';
+        });
+        
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Save new values as defaults
+            inputs.forEach(input => {
+                input.defaultValue = input.value;
+            });
+            
+            // Disable inputs
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+            
+            // Show edit button, hide save/cancel buttons
+            formActions.style.display = 'none';
+            editBtnDiv.style.display = 'block';
+            
+            alert('Данные профиля успешно сохранены');
+        });
+    </script>
+</body>
+</html>

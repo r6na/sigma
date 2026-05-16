@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигма - доставка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #F5E6D3;
+            line-height: 1.5;
+            position: relative;
+            background-color: #1A1814;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.25;
+            filter: brightness(0.7) sepia(0.4);
+        }
+
+        .color-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 24, 20, 0.92) 0%, rgba(46, 38, 24, 0.88) 50%, rgba(26, 24, 20, 0.92) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-bar {
+            background: rgba(26, 24, 20, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 25px 0 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .logo-sigma {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: #D4A017;
+            text-transform: uppercase;
+            text-shadow: 0 0 25px rgba(212, 160, 23, 0.4);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-sigma::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        }
+
+        .nav-bar {
+            background: rgba(26, 24, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+     position: relative;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #C4B89A;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+            position: relative;
+            padding-bottom: 5px;
+            white-space: nowrap;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4A017;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #D4A017;
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .main-nav a.active {
+            color: #D4A017;
+            font-weight: 600;
+        }
+
+.lk-button {
+    position: absolute;
+    right: 0;
+    background: transparent;
+    color: #D4A017;
+    text-decoration: none;
+    padding: 10px 28px;
+    border: 2px solid #D4A017;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    background: rgba(212, 160, 23, 0.08);
+    white-space: nowrap;
+}
+
+        .lk-button a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .lk-button:hover {
+            background: #D4A017;
+            color: #1A1814;
+            box-shadow: 0 0 25px rgba(212, 160, 23, 0.3);
+        }
+
+        .lk-button:hover a {
+            color: #1A1814;
+        }
+
+        /* Контент доставки */
+        .delivery-content {
+            padding: 50px 0 40px;
+        }
+
+        .delivery-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .delivery-header h1 {
+            font-size: 42px;
+            color: #D4A017;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .delivery-description {
+            max-width: 850px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #C4B89A;
+            background: rgba(26, 24, 20, 0.4);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 160, 23, 0.15);
+        }
+
+        .sunflower-divider {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 28px;
+            letter-spacing: 10px;
+            opacity: 0.7;
+            color: #D4A017;
+        }
+
+        /* Транспортная секция */
+        .transport-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .transport-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .transport-card {
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 16px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .transport-card:hover {
+            border-color: rgba(212, 160, 23, 0.5);
+            background: rgba(196, 184, 154, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .transport-card .icon {
+            font-size: 44px;
+            margin-bottom: 15px;
+            display: block;
+            color: #D4A017;
+        }
+
+        .transport-card h3 {
+            font-size: 19px;
+            color: #E8D5B7;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .transport-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #A8987A;
+        }
+
+        /* Экспортная секция */
+        .export-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .export-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .export-description {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #C4B89A;
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+
+        .countries-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .country-tag {
+            padding: 10px 22px;
+            border: 1px solid rgba(212, 160, 23, 0.3);
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #C4B89A;
+            background: rgba(212, 160, 23, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .country-tag:hover {
+            background: rgba(212, 160, 23, 0.2);
+            border-color: #D4A017;
+            color: #D4A017;
+        }
+
+        .export-table-container {
+            overflow-x: auto;
+            margin-top: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 160, 23, 0.2);
+        }
+
+        .export-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(26, 24, 20, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .export-table thead {
+            background: rgba(212, 160, 23, 0.15);
+        }
+
+        .export-table th {
+            padding: 16px 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+            color: #D4A017;
+            border-bottom: 2px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .export-table td {
+            padding: 16px 18px;
+            font-size: 15px;
+            color: #C4B89A;
+            border-bottom: 1px solid rgba(212, 160, 23, 0.1);
+        }
+
+        .export-table tbody tr:hover {
+            background: rgba(212, 160, 23, 0.08);
+        }
+
+        .export-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #E8D5B7;
+        }
+
+        .price-cell {
+            font-weight: 600;
+            color: #D4A017;
+        }
+
+        .horizontal-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.4), transparent);
+            margin: 50px 0;
+        }
+
+        /* Футер */
+        .footer {
+            background: rgba(26, 24, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(212, 160, 23, 0.3);
+            padding: 50px 0 25px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #D4A017;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #D4A017;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #A8987A;
+            margin-bottom: 12px;
+            font-size: 15px;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #D4A017;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(212, 160, 23, 0.2);
+            color: #7A6B5A;
+            font-size: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #D4A017;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media (max-width: 992px) {
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-nav {
+                gap: 20px;
+            }
+            .lk-button {
+                margin-left: 15px;
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-sigma {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-container {
+                justify-content: space-between;
+            }
+            .main-nav {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 24, 20, 0.95);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 25px;
+                display: none;
+                z-index: 100;
+                border-bottom: 2px solid #D4A017;
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .lk-button {
+                position: static;
+                margin-left: 0;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .delivery-header h1 {
+                font-size: 32px;
+            }
+            .delivery-description,
+            .export-description {
+                font-size: 16px;
+            }
+            .countries-list {
+                justify-content: center;
+            }
+            .country-tag {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            .export-table th,
+            .export-table td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline class="video-background">
+        <source src="https://cdn.coverr.co/videos/coverr-sunflower-field-5244/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="color-overlay"></div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-sigma">Sigma</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">---</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="главная.html">Главная</a>
+                <a href="продукция.html">Продукция</a>
+                <a href="доставка.html" class="active">Доставка</a>
+                <a href="контакты.html">Контакты</a>
+                <a href="ии-помощник.html">ИИ-помощник</a>
+            </nav>
+            <button class="lk-button"><a href="лк.html">Личный кабинет</a></button>
+        </div>
+    </div>
+
+    <section class="delivery-content">
+        <div class="container">
+            <div class="delivery-header">
+                <h1>Доставка</h1>
+                <div class="delivery-description">
+                    <p>Организуем самовывоз семян подсолнечника автомобильным и железнодорожным транспортом. Работаем с поставщиками из различных стран мира.</p>
+                </div>
+            </div>
+
+
+            <div class="transport-section">
+                <h2>Транспортные возможности</h2>
+                <div class="transport-grid">
+                    <div class="transport-card">
+                        <span class="icon">&#x1F69A;</span>
+                        <h3>Автомобильный транспорт</h3>
+                        <p>Организация доставки автомобильным транспортом по России и странам СНГ</p>
+                    </div>
+                    <div class="transport-card">
+                        <span class="icon">&#x1F682;</span>
+                        <h3>Железнодорожный транспорт</h3>
+                        <p>Перевозка больших объемов продукции железнодорожным транспортом</p>
+                    </div>
+                    <div class="transport-card">
+                        <span class="icon">&#x1F30D;</span>
+                        <h3>Международные поставки</h3>
+                        <p>Работа с поставщиками из различных стран мира</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="export-section">
+                <h2>Международный экспорт</h2>
+                <div class="export-description">
+                    <p>Sigma -- надежный партнер на международном рынке. Мы поставляем продукцию в ключевые страны:</p>
+                </div>
+                <div class="countries-list">
+                    <span class="country-tag">Египет</span>
+                    <span class="country-tag">Турция</span>
+                    <span class="country-tag">Иран</span>
+                    <span class="country-tag">Китай</span>
+                    <span class="country-tag">Афганистан</span>
+                    <span class="country-tag">Латвия</span>
+                    <span class="country-tag">Киргизия</span>
+                    <span class="country-tag">Казахстан</span>
+                </div>
+                <div class="export-table-container">
+                    <table class="export-table">
+                        <thead>
+                            <tr>
+                                <th>Направление экспорта</th>
+                                <th>Страны</th>
+                                <th>Цена с доставкой на базис (без НДС), руб./т</th>
+                                <th>Цена с доставкой на базис (с НДС), руб./т</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="product-name">Подсолнечное масло</td>
+                                <td>Египет, Турция, Иран, Китай, Афганистан</td>
+                                <td class="price-cell">31 818</td>
+                                <td class="price-cell">35 000</td>
+                            </tr>
+                            <tr>
+                                <td class="product-name">Подсолнечный шрот</td>
+                                <td>Латвия, Киргизия, Турция, Китай, Казахстан, Иран</td>
+                                <td class="price-cell">30 000</td>
+                                <td class="price-cell">33 000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="horizontal-line"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <a href="главная.html">Главная</a>
+                    <a href="продукция.html">Продукция</a>
+                    <a href="доставка.html">Доставка</a>
+                    <a href="контакты.html">Контакты</a>
+                    <a href="/admin.html">Админ-панель</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>улица Мира, 20А, Оренбург, 460040</p>
+                    <p>+7 (35139) 7-51-49</p>
+                    <p>info@tdsigma.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Личный кабинет</h3>
+                    <a href="авторизация.html">Авторизация</a>
+                    <a href="регистрация.html">Регистрация</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                (c) 2025 ГК Сигма. Подсолнечное масло и продукты переработки. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

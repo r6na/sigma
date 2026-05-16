@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигма - контакты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #F5E6D3;
+            line-height: 1.5;
+            position: relative;
+            background-color: #1A1814;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.25;
+            filter: brightness(0.7) sepia(0.4);
+        }
+
+        .color-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 24, 20, 0.92) 0%, rgba(46, 38, 24, 0.88) 50%, rgba(26, 24, 20, 0.92) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-bar {
+            background: rgba(26, 24, 20, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 25px 0 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .logo-sigma {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: #D4A017;
+            text-transform: uppercase;
+            text-shadow: 0 0 25px rgba(212, 160, 23, 0.4);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-sigma::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        }
+
+        .nav-bar {
+            background: rgba(26, 24, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #C4B89A;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+            position: relative;
+            padding-bottom: 5px;
+            white-space: nowrap;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4A017;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #D4A017;
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .main-nav a.active {
+            color: #D4A017;
+            font-weight: 600;
+        }
+
+        .lk-button {
+            position: absolute;
+            right: 0;
+            background: transparent;
+            color: #D4A017;
+            text-decoration: none;
+            padding: 10px 28px;
+            border: 2px solid #D4A017;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(212, 160, 23, 0.08);
+            white-space: nowrap;
+        }
+
+        .lk-button:hover {
+            background: #D4A017;
+            color: #1A1814;
+            box-shadow: 0 0 25px rgba(212, 160, 23, 0.3);
+        }
+
+        .contacts-content {
+            padding: 50px 0 40px;
+        }
+
+        .contacts-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .contacts-header h1 {
+            font-size: 42px;
+            color: #D4A017;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .sunflower-divider {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 28px;
+            letter-spacing: 10px;
+            opacity: 0.7;
+            color: #D4A017;
+        }
+
+        .contacts-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        .contact-info h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 160, 23, 0.12);
+            border: 1px solid rgba(212, 160, 23, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 22px;
+            color: #D4A017;
+        }
+
+        .contact-content {
+            flex: 1;
+        }
+
+        .contact-content h3 {
+            font-size: 15px;
+            color: #A8987A;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .contact-content p {
+            font-size: 18px;
+            color: #E8D5B7;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .contact-action {
+            display: inline-block;
+            background: transparent;
+            color: #D4A017;
+            text-decoration: none;
+            padding: 6px 18px;
+            font-weight: 600;
+            font-size: 13px;
+            border: 1px solid #D4A017;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-action:hover {
+            background: #D4A017;
+            color: #1A1814;
+        }
+
+        .map-section {
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            border: none;
+        }
+
+        /* Блок отзывов */
+        .reviews-section {
+            padding: 30px;
+            margin: 40px 0;
+            background: rgba(196, 184, 154, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+        }
+
+        .reviews-section h2 {
+            font-size: 26px;
+            color: #D4A017;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .review-form {
+            display: grid;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            padding: 25px;
+            background: rgba(26, 24, 20, 0.4);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 16px;
+        }
+
+        .review-form input,
+        .review-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(212, 160, 23, 0.3);
+            border-radius: 10px;
+            background: rgba(26, 24, 20, 0.6);
+            color: #F5E6D3;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .review-form input:focus,
+        .review-form textarea:focus {
+            outline: none;
+            border-color: #D4A017;
+            box-shadow: 0 0 15px rgba(212, 160, 23, 0.15);
+        }
+
+        .review-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .review-form button {
+            padding: 12px 30px;
+            background: #D4A017;
+            color: #1A1814;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            justify-self: start;
+        }
+
+        .review-form button:hover {
+            background: #E5B52D;
+            box-shadow: 0 5px 25px rgba(212, 160, 23, 0.5);
+        }
+
+        .reviews-list {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .review-item {
+            background: rgba(26, 24, 20, 0.4);
+            border: 1px solid rgba(212, 160, 23, 0.15);
+            border-radius: 16px;
+            padding: 20px 25px;
+            position: relative;
+        }
+
+        .review-item::before {
+            content: '"';
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            font-size: 50px;
+            color: rgba(212, 160, 23, 0.2);
+            font-family: 'Bebas Neue', sans-serif;
+            line-height: 1;
+        }
+
+        .review-name {
+            font-size: 16px;
+            color: #D4A017;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #7A6B5A;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #C4B89A;
+            line-height: 1.6;
+        }
+
+        .no-reviews {
+            text-align: center;
+            color: #7A6B5A;
+            font-size: 15px;
+            padding: 20px;
+        }
+
+        .footer {
+            background: rgba(26, 24, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(212, 160, 23, 0.3);
+            padding: 50px 0 25px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #D4A017;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #D4A017;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #A8987A;
+            margin-bottom: 12px;
+            font-size: 15px;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #D4A017;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(212, 160, 23, 0.2);
+            color: #7A6B5A;
+            font-size: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #D4A017;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media (max-width: 992px) {
+            .contacts-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .main-nav {
+                gap: 20px;
+            }
+            .lk-button {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-sigma {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-container {
+                justify-content: flex-end;
+            }
+            .main-nav {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 24, 20, 0.95);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 25px;
+                display: none;
+                z-index: 100;
+                border-bottom: 2px solid #D4A017;
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .lk-button {
+                position: absolute;
+                right: 0;
+            }
+            .contacts-header h1 {
+                font-size: 30px;
+            }
+            .contact-info {
+                padding: 25px;
+            }
+            .contact-info h2 {
+                font-size: 22px;
+            }
+            .contact-content p {
+                font-size: 16px;
+            }
+            .map-section iframe {
+                min-height: 300px;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline class="video-background">
+        <source src="https://cdn.coverr.co/videos/coverr-sunflower-field-5244/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="color-overlay"></div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-sigma">Sigma</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">---</button>
+            <nav class="main-nav" id="mainNav">
+                <a href="главная.html">Главная</a>
+                <a href="продукция.html">Продукция</a>
+                <a href="доставка.html">Доставка</a>
+                <a href="контакты.html" class="active">Контакты</a>
+                <a href="/sigma-site/public/ии-помощник.html">ИИ-помощник</a>
+            </nav>
+            <a href="лк.html" class="lk-button">Личный кабинет</a>
+        </div>
+    </div>
+
+    <section class="contacts-content">
+        <div class="container">
+            <div class="contacts-header">
+                <h1>Контакты</h1>
+            </div>
+
+
+            <div class="contacts-layout">
+                <div class="contact-info">
+                    <h2>Наши контакты</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">*</div>
+                            <div class="contact-content">
+                                <h3>Адрес</h3>
+                                <p>456604, РФ, Оренбургская область, г. Оренбург, улица Мира, 20А</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">*</div>
+                            <div class="contact-content">
+                                <h3>Телефон</h3>
+                                <p>+7 (90684) 5-99-77</p>
+                                <a href="tel:+73513975149" class="contact-action">Позвонить</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">*</div>
+                            <div class="contact-content">
+                                <h3>E-mail</h3>
+                                <p>Dyriikk@yandex.ru</p>
+                                <a href="mailto:Dyriikk@yandex.ru" class="contact-action">Написать</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-section">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2468.3200458308747!2d55.16867117777564!3d51.78203657187711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x417bf76a97dbfa11%3A0xc60b5b61fa66ea5!2z0YPQuy4g0JzQuNGA0LAsIDIw0LAsINCe0YDQtdC90LHRg9GA0LMsINCe0YDQtdC90LHRg9GA0LPRgdC60LDRjyDQvtCx0LsuLCA0NjAwNDA!5e0!3m2!1sru!2sru!4v1778949426887!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <!-- Блок отзывов -->
+            <div class="reviews-section">
+                <h2>Отзывы наших партнёров</h2>
+
+                <!-- Форма добавления отзыва -->
+                <form class="review-form" id="reviewForm">
+    <input type="text" id="reviewName" placeholder="Ваше имя *" required>
+    <textarea id="reviewText" placeholder="Ваш отзыв *" rows="3" required></textarea>
+    <button type="submit">Оставить отзыв</button>
+</form>
+
+<div class="reviews-list" id="reviewsList">
+    <!-- существующие отзывы -->
+</div>
+
+                <!-- Список отзывов -->
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <a href="главная.html">Главная</a>
+                    <a href="продукция.html">Продукция</a>
+                    <a href="доставка.html">Доставка</a>
+                    <a href="контакты.html">Контакты</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>улица Мира, 20А, Оренбург, 460040</p>
+                    <p>+7 (35139) 7-51-49</p>
+                    <p>info@tdsigma.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Личный кабинет</h3>
+                    <a href="авторизация.html">Авторизация</a>
+                    <a href="регистрация.html">Регистрация</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                (c) 2025 ГК Сигма. Подсолнечное масло и продукты переработки. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        if (mobileMenuBtn && mainNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            const navLinks = document.querySelectorAll('.main-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Отзывы
+        window.addEventListener('DOMContentLoaded', function() {
+            const reviewForm = document.getElementById('reviewForm');
+            const reviewsList = document.getElementById('reviewsList');
+            const reviewName = document.getElementById('reviewName');
+            const reviewText = document.getElementById('reviewText');
+
+            if (reviewForm && reviewsList && reviewName && reviewText) {
+                reviewForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = reviewName.value.trim();
+                    const text = reviewText.value.trim();
+                    
+                    if (name === '' || text === '') {
+                        alert('Пожалуйста, заполните все поля');
+                        return;
+                    }
+                    
+                    const months = [
+                        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+                        'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+                    ];
+                    const now = new Date();
+                    const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+                    
+                    const safeName = name.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    const safeText = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    
+                    const reviewHTML = '<div class="review-item">' +
+                        '<div class="review-name">' + safeName + '</div>' +
+                        '<div class="review-date">' + dateStr + '</div>' +
+                        '<div class="review-text">' + safeText + '</div>' +
+                        '</div>';
+                    
+                    reviewsList.insertAdjacentHTML('afterbegin', reviewHTML);
+                    reviewForm.reset();
+                });
+            } else {
+                console.error('Не найдены элементы формы отзывов');
+            }
+        });
+    </script>
+</body>
+</html>
