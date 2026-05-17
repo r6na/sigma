@@ -589,7 +589,7 @@
                 <a href="контакты.html" class="active">Контакты</a>
                 <a href="/sigma-site/public/ии-помощник.html">ИИ-помощник</a>
             </nav>
-            <a href="лк.html" class="lk-button">Личный кабинет</a>
+            <a href="/sigma-server/views/login.ejs" class="lk-button">Личный кабинет</a>
         </div>
     </div>
 
@@ -630,7 +630,7 @@
                     </div>
                 </div>
                 <div class="map-section">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2468.3200458308747!2d55.16867117777564!3d51.78203657187711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x417bf76a97dbfa11%3A0xc60b5b61fa66ea5!2z0YPQuy4g0JzQuNGA0LAsIDIw0LAsINCe0YDQtdC90LHRg9GA0LMsINCe0YDQtdC90LHRg9GA0LPRgdC60LDRjyDQvtCx0LsuLCA0NjAwNDA!5e0!3m2!1sru!2sru!4v1778949426887!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2468.3200458308747!2d55.16867117777564!3d51.78203657187711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x417bf76a97dbfa11%3A0xc60b5b61fa66ea5!2z0YPQuy4g0JzQuNGA0LAsIDIw0LAsINCe0YDQtdC90LHRg9GA0LMsINCe0YDQtdC90LHRg9GA0LPRgdC60LDRjyDQvtCx0LsuLCA0NjAwNDA!5e0!3m2!1sru!2sru!4v1778949426887!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
@@ -640,17 +640,14 @@
 
                 <!-- Форма добавления отзыва -->
                 <form class="review-form" id="reviewForm">
-    <input type="text" id="reviewName" placeholder="Ваше имя *" required>
-    <textarea id="reviewText" placeholder="Ваш отзыв *" rows="3" required></textarea>
-    <button type="submit">Оставить отзыв</button>
-</form>
+                    <input type="text" id="reviewName" placeholder="Ваше имя *" required>
+                   <textarea id="reviewText" placeholder="Ваш отзыв *" rows="3" required></textarea>
+                   <button type="submit">Оставить отзыв</button>
+             </form>
 
-<div class="reviews-list" id="reviewsList">
+            <div class="reviews-list" id="reviewsList">
     <!-- существующие отзывы -->
-</div>
-
-                <!-- Список отзывов -->
-                
+           </div> 
             </div>
         </div>
     </section>
